@@ -7,10 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RequiredArgsConstructor
@@ -31,5 +28,17 @@ public class TransacaoController {
     public ResponseEntity<Void> addTransaction(@RequestBody TransacaoRequestDTO dto) {
         transacaoService.addTransactions(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping
+    @Operation(description = "Endpoint responsável por deletar transações")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Todas as informações foram apagadas com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro de requisição"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    public ResponseEntity<Void> deleteTransactions(){
+        transacaoService.deleteTransactions();
+        return ResponseEntity.ok().build();
     }
 }

@@ -31,4 +31,10 @@ public class TransacaoService {
         listTransactions.add(dto);
         log.info("Transação adicionada com sucesso!");
     }
+
+    public void deleteTransactions(){
+        log.info("Executando serviço para deletar as transações...");
+        listTransactions.clear();
+        log.info("Transações deletadas com sucesso!");
+    }
 }
