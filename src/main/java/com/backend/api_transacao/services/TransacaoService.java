@@ -37,4 +37,13 @@ public class TransacaoService {
         listTransactions.clear();
         log.info("Transações deletadas com sucesso!");
     }
+
+    public List<TransacaoRequestDTO> getTransactions(Integer intervalo){
+        log.info("Iniciada a busca de transações");
+        OffsetDateTime dataHoraIntervalo = OffsetDateTime.now().minusSeconds(intervalo);
+
+        return listTransactions.stream()
+                .filter(transaction -> transaction.dataHora()
+                        .isAfter(dataHoraIntervalo)).toList();
+    }
 }
